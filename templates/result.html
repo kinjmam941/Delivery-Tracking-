@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Tracking Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tracking Details</h1>
+    <div class="container result-page">
+        <h1>📦 Tracking Details</h1>
+
         {% if data.error %}
             <p class="error">{{ data.error }}</p>
         {% elif not data.tracking_data %}
             <p>No tracking data found for this AWB code.</p>
         {% else %}
             {% set track = data.tracking_data.shipment_track[0] %}
-            <p><strong>AWB Code:</strong> {{ track.awb_code }}</p>
-            <p><strong>Status:</strong> {{ track.current_status }}</p>
-            <p><strong>Courier:</strong> {{ track.courier_name }}</p>
-            <p><strong>Origin:</strong> {{ track.origin }}</p>
-            <p><strong>Destination:</strong> {{ track.destination }}</p>
-            <p><strong>Pickup Date:</strong> {{ track.pickup_date }}</p>
-            <p><strong>Delivered Date:</strong> {{ track.delivered_date or "Not yet delivered" }}</p>
 
-            <h2>Tracking History</h2>
+            <div class="info-card">
+                <p><strong>AWB Code:</strong> {{ track.awb_code }}</p>
+                <p><strong>Status:</strong> {{ track.current_status }}</p>
+                <p><strong>Courier:</strong> {{ track.courier_name }}</p>
+                <p><strong>Origin:</strong> {{ track.origin }}</p>
+                <p><strong>Destination:</strong> {{ track.destination }}</p>
+                <p><strong>Pickup Date:</strong> {{ track.pickup_date }}</p>
+                <p><strong>Delivered Date:</strong> {{ track.delivered_date or "Not yet delivered" }}</p>
+            </div>
+
+            <h2>📍 Tracking History</h2>
             <ul class="timeline">
                 {% for activity in data.tracking_data.shipment_track_activities %}
                     <li>
-                        <span>{{ activity.date }}</span>
-                        <p>{{ activity.activity }} ({{ activity['sr-status-label'] }})</p>
-                        <small>{{ activity.location }}</small>
+                        <div class="activity">
+                            <span class="date">{{ activity.date }}</span>
+                            <p class="text">{{ activity.activity }} <br><small>Status: {{ activity['sr-status-label'] }}</small></p>
+                            <small class="location">📍 {{ activity.location }}</small>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
         {% endif %}
-        <a href="/" class="back-btn">Track Another</a>
+
+        <a href="/" class="back-btn">← Track Another</a>
     </div>
 </body>
 </html>
