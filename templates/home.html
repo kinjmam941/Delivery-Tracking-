@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Lenzzi Order Tracking</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="container">
-        <h1>Lenzzi Order Tracking</h1>
-        <form method="post">
-            <input type="text" name="awb_code" placeholder="Enter AWB Number" required>
-            <button type="submit">Track</button>
+    <div style="width:90%; max-width:500px; margin:20px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+        <h1 style="font-size:24px; text-align:center; margin-bottom:20px; color:#2c3e50;">Lenzzi Order Tracking</h1>
+        <form method="post" style="display:flex; flex-direction:column; gap:15px;">
+            <input type="text" name="awb_code" placeholder="Enter AWB Number" required 
+                   style="padding:12px 15px; font-size:16px; border:1px solid #ddd; border-radius:5px; width:100%; box-sizing:border-box;">
+            <button type="submit" style="background-color:#3498db; color:white; border:none; padding:12px 15px; font-size:16px; border-radius:5px; cursor:pointer;">
+                Track
+            </button>
         </form>
     </div>
 </body>
